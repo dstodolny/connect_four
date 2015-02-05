@@ -17,8 +17,6 @@ module ConnectFour
       false
     end
 
-    # private
-
     def default_grid
       Array.new(7) { Array.new }
     end
@@ -38,6 +36,7 @@ module ConnectFour
     end
 
     def draw?
+      grid.all? { |column| column.size == 6 }
     end
   end
 end
