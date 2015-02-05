@@ -38,8 +38,24 @@ module ConnectFour
       it "asks the player to make a move" do
         game = Game.new([lukasz, dominik])
         allow(game).to receive(:current_player) { lukasz }
-        expected = "Lukasz: Enter a number between 1 and 7 to make your move"
+        expected = "Lukasz(\u25cf ): Enter a number between 1 and 7 to make your move"
         expect(game.solicit_move).to eq expected
+      end
+    end
+
+    context "game_over_message" do
+      it "returns '{current_player name} won!' if board shows a winner" do
+        game = Game.new([lukasz, dominik])
+        allow(game).to receive(:current_player) { lukasz }
+        allow(game.board).to receive(:game_over) { :winner }
+        expect(game.game_over_message).to eq "Lukasz won!"
+      end
+
+      it "returns 'The game ended in a tie' if board shows a draw" do
+        game = Game.new([lukasz, dominik])
+        allow(game).to receive(:current_player) { dominik }
+        allow(game.board).to receive(:game_over) { :draw }
+        expect(game.game_over_message).to eq "The game ended in a tie"
       end
     end
   end

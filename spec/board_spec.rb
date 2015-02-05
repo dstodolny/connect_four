@@ -27,8 +27,7 @@ module ConnectFour
 
     context "#drop_in" do
       it "drops a token to the bottom of specified column" do
-        grid = [[], [], []]
-        board = Board.new(grid: grid)
+        board = Board.new
         board.drop_in(1, "something")
         expect(board.grid[1].first).to eq "something"
       end
@@ -81,7 +80,7 @@ module ConnectFour
         end
 
         it "returns :winner when in right diagonal" do
-          grid = [%w(a a a), %w(b a b b), %w(b a a a), %w(a b a a b)]
+          grid = [%w(a a a), %w(b a b b), %w(b a a a), %w(a b a a b), %w(b b)]
           board = Board.new(grid: grid)
           expect(board.game_over).to eq :winner
         end
@@ -89,8 +88,14 @@ module ConnectFour
         it "returns :winner when in left diagonal" do
           grid = [%w(a a b a b), %w(b a a b), %w(b a a a), %w(a b a)]
           board = Board.new(grid: grid)
-          expect(board.game_over).to eql :winner
+          expect(board.game_over).to eq :winner
         end
+      end
+
+      it "returns false" do
+        grid = [%w(a b a b a b), %w(a), %w(a b a b a b), [], %w(a b a b a b), []]
+        board = Board.new(grid: grid)
+        expect(board.game_over).to eq false
       end
     end
   end

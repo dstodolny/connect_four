@@ -30,8 +30,9 @@ class Array
   end
 
   def rotate
-    n = [self.size, self.map { |column| column.size }.max].max
-    self.each { |column| (n - column.size).times { column.push(nil) } }
-    (0..n - 1).map { |row| self.map { |column| column[row] } }
+    ary = self.deep_dup
+    n = [ary.size, ary.map { |column| column.size }.max].max
+    ary.each { |column| (n - column.size).times { column.push(nil) } }
+    (0..n - 1).map { |row| ary.map { |column| column[row] } }
   end
 end
