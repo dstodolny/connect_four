@@ -61,16 +61,30 @@ module ConnectFour
         expect(board.game_over).to eq false
       end
 
-      it "returns :winner when column contains four neighbouring tokens of the same kind" do
-        grid = [%w(a b a a a a)]
-        board = Board.new(grid: grid)
-        expect(board.game_over).to eql :winner
-      end
+      context "with four neighbouring tokens in grid of the same type" do
+        it "returns :winner in column" do
+          grid = [%w(a b a a a a)]
+          board = Board.new(grid: grid)
+          expect(board.game_over).to eql :winner
+        end
 
-      it "return :winner when row contains four neighbouring tokens of the same kind" do
-        grid = [%w(a b), %w(a b), %w(b b), %w(b b)]
-        board = Board.new(grid: grid)
-        expect(board.game_over).to eql :winner
+        it "returns :winner in row" do
+          grid = [%w(a b), %w(a b), %w(b b), %w(b b)]
+          board = Board.new(grid: grid)
+          expect(board.game_over).to eql :winner
+        end
+
+        it "returns :winner when in right diagonal" do
+          grid = [%w(a a a), %w(b a b b), %w(b a a a), %w(a b a a b)]
+          board = Board.new(grid: grid)
+          expect(board.game_over).to eql :winner
+        end
+
+        it "returns :winner when in left diagonal" do
+          grid = [%w(a a b a b), %w(b a a b), %w(b a a a), %w(a b a)]
+          board = Board.new(grid: grid)
+          expect(board.game_over).to eql :winner
+        end
       end
     end
   end

@@ -17,26 +17,27 @@ module ConnectFour
       false
     end
 
-    private
+    # private
 
     def default_grid
       Array.new(7) { Array.new }
     end
 
     def winner?
-      columns.any? { |column| column.join.match(/(.)\1{3}/) } ||
-        rows.any? { |row| row.join.match(/(.)\1{3}/) }
+      pattern = /(.)\1{3}/
+      lines.any? { |line| line.join.match(pattern) }
+    end
+
+    def lines
+      ary = []
+      grid.each { |line| ary << line }
+      grid.rotate.each { |line| ary << line }
+      grid.right_diagonals.each { |line| ary << line }
+      grid.left_diagonals.each { |line| ary << line }
+      ary
     end
 
     def draw?
-    end
-
-    def columns
-      grid
-    end
-
-    def rows
-      (0..grid.size - 1).map { |row| grid.map { |column| column[row] } }
     end
   end
 end
