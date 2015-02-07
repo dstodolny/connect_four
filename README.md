@@ -1,31 +1,5 @@
 # ConnectFour
 
-TODO: Write a gem description
+A connect four clone written in test driven development (rspec) for [The Odin Project](http://www.theodinproject.com/ruby-programming/testing-ruby). To play it, run `bin/connect_four.rb` from the root directory. To test it, run `rspec` from the root directory.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'connect_four'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install connect_four
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/connect_four/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+To check if there is a winner I have used my own implementation of two matrix operations: rotating and picking up diagonals. Then I have used regex to check if there are four neighbouring characters next to each other.
